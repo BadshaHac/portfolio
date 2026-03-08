@@ -1,1064 +1,783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Premkumar Nomul | Cybersecurity & Pentesting</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>Premkumar Nomul | Cybersecurity Pentester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --accent: #7c3aed;
-      --accent-soft: rgba(124, 58, 237, 0.1);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --card: #0f172a;
-      --border: #1f2937;
-      --danger: #ef4444;
-      --success: #10b981;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
-      --radius-lg: 18px;
+      --bg: #0a0a0f;
+      --bg-alt: #111118;
+      --accent: #6366f1;
+      --accent-glow: #8b5cf6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: #161623;
+      --border: rgba(99, 102, 241, 0.2);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      --radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #FFD700;
+}
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border: rgba(99, 102, 241, 0.15);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    html, body {
+    html {
       scroll-behavior: smooth;
-      background: radial-gradient(circle at top, #111827 0, #020617 40%);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
     }
 
     body {
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      max-width: 1080px;
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 24px 20px 80px;
+      padding: 0 1.5rem;
     }
 
+    /* Header */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 20;
+      width: 100%;
+      background: rgba(10, 10, 15, 0.95);
       backdrop-filter: blur(20px);
-      background: linear-gradient(
-        to bottom,
-        rgba(2, 6, 23, 0.9),
-        rgba(2, 6, 23, 0.4),
-        transparent
-      );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: var(--transition);
     }
 
-    .nav {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 12px 20px;
+    nav {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
-    }
-
-    .nav-left {
-      display: flex;
       align-items: center;
-      gap: 10px;
+      padding: 15px 8%;
     }
 
     .logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #fbbf24, #f97316 30%, #7c3aed 60%, #22c55e 100%);
-      box-shadow: 0 0 25px rgba(124, 58, 237, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .brand-role {
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .nav-links {
       display: flex;
-      gap: 18px;
-      font-size: 13px;
+      gap: 2rem;
+      list-style: none;
     }
 
     .nav-links a {
-      color: var(--muted);
-      padding: 4px 0;
-      border-bottom: 1px solid transparent;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
     }
 
     .nav-links a:hover {
-      color: var(--text);
-      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    .nav-right {
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      transition: var(--transition);
     }
 
-    .pill {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--muted);
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .hero-text .highlight {
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
     }
 
     .btn-primary {
-      font-size: 12px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #7c3aed, #22c55e);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6);
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      color: white;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
     }
 
-    .btn-primary span {
-      font-size: 15px;
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.6);
     }
 
-    main {
-      margin-top: 30px;
-      display: grid;
-      grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.7fr);
-      gap: 20px;
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
     }
 
-    @media (max-width: 880px) {
-      .nav {
-        padding-inline: 14px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      main {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
     }
 
-    @media (max-width: 560px) {
-      .page {
-        padding-inline: 14px;
-      }
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 55%),
-        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.94));
-      border-radius: 22px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 22px 20px 20px;
-      box-shadow: var(--shadow-soft);
+    /* Terminal */
+    .terminal {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
-      gap: 18px;
-      align-items: center;
+    .terminal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: glow 3s infinite;
     }
 
-    @media (max-width: 720px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .online-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    }
-
-    .badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .headline {
-      font-size: clamp(26px, 3vw, 30px);
-      line-height: 1.2;
-      margin-bottom: 10px;
-      letter-spacing: 0.01em;
-    }
-
-    .headline span.highlight {
-      background: linear-gradient(120deg, #7c3aed, #22c55e, #f97316);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subheadline {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 14px;
-      max-width: 32rem;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .btn-ghost {
-      font-size: 12px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.85);
-      color: var(--muted);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .meta-row span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .meta-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.7);
-    }
-
-    .hero-visual {
-      position: relative;
-      padding: 12px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top, rgba(39, 39, 42, 0.9), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    @keyframes glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
     }
 
     .terminal-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-      margin-bottom: 10px;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .traffic-lights {
       display: flex;
-      gap: 6px;
+      gap: 0.25rem;
     }
 
-    .circle {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
+    .light {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
     }
 
-    .circle.red {
-      background: #f97373;
-    }
+    .light.red { background: #ff5f57; }
+    .light.yellow { background: #ffbd2e; }
+    .light.green { background: #28ca42; }
 
-    .circle.yellow {
-      background: #facc15;
-    }
-
-    .circle.green {
-      background: #4ade80;
-    }
-
-    .terminal-body {
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-        Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 11px;
-      line-height: 1.5;
-      color: #e5e7eb;
-      background: radial-gradient(circle at top left, #020617, #020617 60%);
-      border-radius: 12px;
-      padding: 12px 10px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      max-height: 220px;
-      overflow: auto;
-    }
-
-    .prompt {
-      color: #6ee7b7;
-    }
-
-    .cmd {
-      color: #e5e7eb;
-    }
-
-    .cyan {
-      color: #22d3ee;
-    }
-
-    .purple {
-      color: #a855f7;
-    }
-
-    .gray {
-      color: #9ca3af;
-    }
-
-    .comment {
-      color: #4b5563;
-    }
-
-    .hero-badges {
-      position: absolute;
-      left: 14px;
-      bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 10px;
-    }
-
-    .hero-badge {
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      color: var(--muted);
-      backdrop-filter: blur(10px);
-    }
-
-    .side-column {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.92));
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 14px 14px 12px;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .card-title {
-      font-size: 13px;
+    .terminal-prompt {
+      color: #10b981;
       font-weight: 600;
     }
 
-    .card-sub {
-      font-size: 11px;
-      color: var(--muted);
+    .terminal-text {
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
     }
 
-    .chip-row {
+    /* Sections */
+    .section {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+   .card-meta a {
+  color: #FFD700;
+  font-weight: 500;
+}
+
+.card-meta a:hover {
+  text-decoration: underline;
+}
+
+    .card-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-      margin-bottom: 4px;
+      gap: 0.5rem;
     }
 
-    .chip {
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      color: var(--muted);
+    .tag {
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
     }
 
+    /* Experience Timeline */
     .timeline {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 11px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+      transform: translateX(-50%);
     }
 
     .timeline-item {
       display: flex;
-      gap: 8px;
+      margin-bottom: 3rem;
+      position: relative;
     }
 
-    .timeline-marker {
-      margin-top: 4px;
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #4ade80;
-      box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+    .timeline-content {
+      width: 45%;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
     }
 
-    .timeline-content span {
-      display: block;
+    .timeline-content.left {
+      margin-right: 50%;
     }
 
-    .timeline-role {
-      font-weight: 500;
-      font-size: 11px;
+    .timeline-content.right {
+      margin-left: 50%;
     }
 
-    .timeline-meta {
-      color: var(--muted);
-      font-size: 10px;
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 2rem;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
-    .timeline-desc {
-      color: var(--muted);
-      margin-top: 2px;
-    }
+    /* Contact */
+    #contact a {
+  color: #FFD700;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    .section {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-      gap: 18px;
-    }
+#contact a:hover {
+  color: #ffea00;
+  text-shadow: 0 0 6px #FFD700;
+}
 
-    @media (max-width: 880px) {
-      .section {
-        grid-template-columns: minmax(0, 1fr);
+    @media (max-width: 768px) {
+      .hero-content,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-content {
+        width: calc(100% - 40px);
+        margin-left: 40px !important;
+        margin-right: 0 !important;
+      }
+
+      .timeline-dot {
+        left: 20px;
       }
     }
 
-    .section-left {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .section-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .project-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 12px;
-    }
-
-    .project-item {
-      padding: 9px 10px;
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .project-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .project-name {
-      font-weight: 500;
-    }
-
-    .project-link a {
-      font-size: 11px;
-      color: #38bdf8;
-    }
-
-    .project-desc {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .project-tag {
-      font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: var(--muted);
-    }
-
-    .cert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .cert-item {
-      padding: 8px 9px;
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(51, 65, 85, 0.9);
-    }
-
-    .cert-name {
-      font-weight: 500;
-    }
-
-    .cert-meta {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .skill-pill {
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      color: var(--muted);
-    }
-
     footer {
-      margin-top: 30px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
   <header>
-    <nav class="nav">
-      <div class="nav-left">
-        <div class="logo">P</div>
-        <div class="brand">
-          <span class="brand-name">Premkumar Nomul</span>
-          <span class="brand-role">Cybersecurity & Pentesting</span>
-        </div>
-      </div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-right">
-        <div class="pill">Mumbai, India · Open to roles</div>
-        <a href="#contact" class="btn-primary">
-          <span>●</span> Contact
-        </a>
-      </div>
+    <nav class="container">
+      <div class="logo">
+  <img src="prem.jpg" >
+  
+
+</div>
+      <div class="logo"></div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        🌙
+      </button>
     </nav>
   </header>
 
-  <div class="page">
-    <main>
-      <section class="hero-card" id="about">
-        <div class="hero-grid">
-          <div>
-            <div class="badge-row">
-              <span class="online-dot"></span>
-              <span>Available for Cybersecurity & Pentest roles</span>
-              <span class="badge">BTech · Electronics & Computer Science</span>
-            </div>
-            <h1 class="headline">
-              Securing systems through <span class="highlight">pentesting, forensics</span> and hands‑on internships.
-            </h1>
-            <p class="subheadline">
-              Passionate cybersecurity aficionado with experience in digital forensics, network security, and real‑world cybercrime investigations, currently interning at Maharashtra Cyber Cell and upskilling across leading security tools.[file:37]
-            </p>
-
-            <div class="tag-list">
-              <span class="tag">Pentesting</span>
-              <span class="tag">Digital Forensics</span>
-              <span class="tag">Network Security</span>
-              <span class="tag">Linux / Windows</span>
-              <span class="tag">Metasploit · Nmap · Burp Suite</span>
-            </div>
-<br>
-            <hr>
-         
-            <div class="cta-row">
-              <a href="#projects" class="btn-primary">
-                View security projects →
-              </a>
-              <button class="btn-ghost" onclick="window.open('https://github.com/BadshaHac','_blank')">
-                GitHub Profile
-              </button>
-              <button class="btn-ghost" onclick="window.open('https://linkedin.com/premkumar-nomul','_blank')">
-                LinkedIn
-              </button>
-            </div>
-
-            <div class="meta-row">
-              <span><span class="meta-dot"></span> 2021‑26 · Cybersecurity journey</span>
-              <span><span class="meta-dot"></span> Sanmati DFIR · Palo Alto · Fortinet · Zscaler · Maharashtra Cyber Cell</span>
-            </div>
-          </div>
-
-          <div class="hero-visual">
-            <div class="terminal-header">
-              <div class="traffic-lights">
-                <div class="circle red"></div>
-                <div class="circle yellow"></div>
-                <div class="circle green"></div>
-              </div>
-              <span>prem@security: ~/portfolio</span>
-              <span>zsh</span>
-            </div>
-            <div class="terminal-body" id="terminal">
-              <div><span class="comment"># Cybersecurity portfolio snapshot</span></div>
-              <div><span class="prompt">prem@security</span>:<span class="cyan">~</span>$ <span class="cmd">whoami</span></div>
-              <div><span class="purple">Pentester</span> &amp; <span class="purple">Digital Forensics Intern</span></div>
-              <br />
-              <div><span class="prompt">prem@security</span>:<span class="cyan">~</span>$ <span class="cmd">ls internships/</span></div>
-              <div>- Sanmati Digital Forensic</div>
-              <div>- Palo Alto Networks Cybersecurity Virtual Internship</div>
-              <div>- Fortinet Network Security Associate (Virtual)</div>
-              <div>- Zscaler Networking Virtual Internship (EduSkills–AICTE)</div>
-              <div>- Maharashtra Cyber Cell (Digital Forensics & Cybercrime)</div>
-              <br />
-              <div><span class="prompt">prem@security</span>:<span class="cyan">~</span>$ <span class="cmd">ls projects/</span></div>
-              <div>- Port Scanner (Python)</div>
-              <div>- Cryptography Encoder/Decoder</div>
-              <div>- Password Strength Checker</div>
-              <div>- Network Packet Analyzer</div>
-              <div>- Cybernews Automation Workflow</div>
-              <br />
-              <div><span class="prompt">prem@security</span>:<span class="cyan">~</span>$ <span class="cmd">cat mission.txt</span></div>
-              <div class="gray">
-                Hard‑working, always‑learning cybersecurity practitioner, aiming to
-                make impactful contributions to digital security through hands‑on
-                investigations, tooling, and awareness.
-              </div>
-            </div>
-            <div class="hero-badges">
-              <div class="hero-badge">Mumbai, India · IST (UTC+5:30)</div>
-              <div class="hero-badge">Open to internships & entry‑level security roles</div>
-            </div>
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Premkumar Nomul<span class="highlight"><br>Pentester & Cybersecurity Aficionado</span></h1>
+          <p>Passionate about cultivating expertise in Information Security, I am an enthusiastic Cybersecurity aficionado driven by an unwavering commitment to relentless hard work. Armed with exceptional team management, leadership, CS soft skills, and communication prowess, I am poised to immerse myself in the dynamic world of Cybersecurity.</p>
+          <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
           </div>
         </div>
-      </section>
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="traffic-lights">
+              <div class="light red"></div>
+              <div class="light yellow"></div>
+              <div class="light green"></div>
+            </div>
+            <div>prem@cyber:~$</div>
+          </div>
+          <div class="terminal-text" id="terminalOutput">
+<span class="terminal-prompt">whoami</span>
+Premkumar Nomul - Pentester & Cybersecurity Intern
+<span class="terminal-prompt">ls internships/</span>
+├── Maharashtra Cyber Cell (Jun 2025–Present)
+├── Zscaler Networking (Jan–Mar 2025)
+├── Fortinet Network Security (Oct–Dec 2024)
+├── Palo Alto Cybersecurity (Jul–Sep 2024)
+└── Sanmati Digital Forensic (Jul–Aug 2023)
+<span class="terminal-prompt">ls projects/</span>
+├── Port Scanner Tool (Python)
+├── Cryptography Encoder/Decoder
+├── Password Strength Checker
+├── Network Packet Analyzer
+├── Cybernews Automation (n8n)
+└── Online Chatting Website (WordPress)
+<span class="terminal-prompt">echo "Ready for cybersecurity challenges"</span>
+Ready for cybersecurity challenges
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <aside class="side-column">
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Skills & Expertise</h2>
+        <p class="section-subtitle">Technical skills and domains from my cybersecurity journey</p>
+      </div>
+      <div class="card-grid">
         <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Quick info</div>
-              <div class="card-sub">Profile snapshot</div>
-            </div>
-          </div>
-          <div class="chip-row">
-            <div class="chip">Email: nomul.premkumar04@gmail.com</div>
-            <div class="chip">Phone: +91 9819955641</div>
-            <div class="chip">Location: Mumbai, India</div>
-          </div>
-          <div class="skills-grid" style="margin-top:8px;">
-            <span class="skill-pill">Operating Systems: Linux, Windows</span>
-            <span class="skill-pill">Security Tools: Metasploit, Nmap, Burp Suite</span>
-            <span class="skill-pill">Network Security & Cryptography</span>
-            <span class="skill-pill">Digital Forensics & Investigations</span>
-            <span class="skill-pill">Teamwork & Communication</span>
+          <h3 class="card-title">Core Technical Skills</h3>
+          <div class="tags">
+            <span class="tag">Operating Systems (Linux, Windows)</span>
+            <span class="tag">Security Tools (Metasploit, Nmap, Burp Suite)</span>
+            <span class="tag">Network Security</span>
+            <span class="tag">Cryptography</span>
+            <span class="tag">Digital Forensics</span>
           </div>
         </div>
-
-        <div class="card" id="experience">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Experience</div>
-              <div class="card-sub">Internships & practical exposure</div>
-            </div>
-          </div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-role">Maharashtra Cyber Cell · Intern</span>
-                <span class="timeline-meta">Digital Forensics & Cybercrime Investigation · Jun 2025 – Present</span>
-                <span class="timeline-desc">
-                  Assisting in analysis of digital evidence, learning cyber laws in practice, supporting law enforcement in ongoing cases, and contributing to cybersecurity awareness initiatives.[file:37]
-                </span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-role">Zscaler Networking Virtual Internship</span>
-                <span class="timeline-meta">Networking & Cloud Security · Jan 2025 – Mar 2025</span>
-                <span class="timeline-desc">
-                  Gained hands‑on experience in networking, cybersecurity fundamentals, cloud security, and real‑world network security tools.[file:37]
-                </span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-role">Fortinet Network Security Associate</span>
-                <span class="timeline-meta">Virtual Internship · Oct 2024 – Dec 2024</span>
-                <span class="timeline-desc">
-                  Configured firewalls, VPNs, IPS, identified vulnerabilities, monitored threats, and responded to security incidents using Fortinet tools.[file:37]
-                </span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-role">Palo Alto Networks Cybersecurity Virtual Internship</span>
-                <span class="timeline-meta">Cyber Threat Detection & Response</span>
-                <span class="timeline-desc">
-                  Worked on cyber threat detection, incident response, and security mitigation through guided labs and scenarios.[file:37]
-                </span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-role">Sanmati Digital Forensic · Intern</span>
-                <span class="timeline-meta">Digital Forensics · Jul 2023 – Aug 2023</span>
-                <span class="timeline-desc">
-                  Conducted forensic analysis, handled digital evidence, and contributed to investigative reports in real‑world cases.[file:37]
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Education</div>
-              <div class="card-sub">BTech · Electronics & Computer Science</div>
-            </div>
-          </div>
-          <div style="font-size:11px;color:var(--muted);">
-            Shah and Anchor Kutchhi Engineering College · 2021–2026.[file:37]
+          <h3 class="card-title">Soft Skills</h3>
+          <p class="card-description">Team management, leadership, CS soft skills, communication prowess</p>
+          <div class="card-meta">Driven by motivation to learn, grow, and excel in digital security</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Work Experience</h2>
+        <p class="section-subtitle">Hands-on internships in cybersecurity, forensics, and network security</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content right">
+            <h3 class="card-title">Maharashtra Cyber Cell</h3>
+            <div class="card-meta">Intern · Digital Forensics & Cybercrime Investigation · 16 June 2025 – Present</div>
+            <p class="card-description">Currently interning at the Maharashtra Cyber Cell, gaining hands-on experience in cybercrime investigation and digital forensics. Assisting in analysis of digital evidence, learning practical application of cyber laws, supporting law enforcement, and contributing to cybersecurity awareness initiatives.</p>
           </div>
         </div>
-      </aside>
-    </main>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content left">
+            <h3 class="card-title">Networking Virtual Internship – Zscaler</h3>
+            <div class="card-meta">EduSkills–AICTE · Jan 2025 – Mar 2025</div>
+            <p class="card-description">Completed a 10-week Networking Virtual Internship with Zscaler, gaining hands-on experience in networking, cybersecurity fundamentals, cloud security, and real-world network security tools.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content right">
+            <h3 class="card-title">Network Security Associate Virtual Internship – Fortinet</h3>
+            <div class="card-meta">Oct 2024 – Dec 2024</div>
+            <p class="card-description">Gained hands-on experience in network security, configuring firewalls, VPNs, IPS, identifying vulnerabilities, monitoring threats, and responding to security incidents through Fortinet tools.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content left">
+            <h3 class="card-title">Cybersecurity Virtual Internship – Palo Alto Networks</h3>
+            <div class="card-meta">Jul 2024 – Sep 2024</div>
+            <p class="card-description">Gained hands-on experience in cyber threat detection, incident response, and security mitigation through the Palo Alto Networks Cybersecurity Virtual Internship.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content right">
+            <h3 class="card-title">Sanmati Digital Forensic Internship</h3>
+            <div class="card-meta">Jul 2023 – Aug 2023</div>
+            <p class="card-description">Learned to conduct forensic analysis, handle digital evidence, and create investigative reports during my Sanmati Digital Forensics internship.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="section" id="projects">
-      <div class="section-left">
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Hands-on security tools and applications I've built</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">Online chatting website using Wordpress</h3>
+          <div class="card-meta">Live Demo: <a href="http://metax2.rf.gd" target="_blank">metax2.rf.gd</a></div>
+          <p class="card-description">Online chatting website created using WordPress, exploring real-time communication and user experience design.</p>
+          <div class="tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Web Development</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Port Scanner Tool using Python</h3>
+          <div class="card-meta">GitHub – Port-scanner</div>
+          <p class="card-description">Port Scanner Tool using Python for network reconnaissance and service discovery.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Networking</span>
+            <span class="tag">Reconnaissance</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Cryptography Encoder/Decoder for secure text communication</h3>
+          <div class="card-meta">GitHub – Cryptography Tool</div>
+          <p class="card-description">Cryptography Encoder/Decoder for secure text communication implementing encryption/decryption techniques.</p>
+          <div class="tags">
+            <span class="tag">Cryptography</span>
+            <span class="tag">Encryption</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Password Strength Checker</h3>
+          <div class="card-meta">GitHub – Password Checker</div>
+          <p class="card-description">Password Strength Checker to evaluate and improve password security with comprehensive analysis.</p>
+          <div class="tags">
+            <span class="tag">Security</span>
+            <span class="tag">Password Analysis</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Network Packet Analyzer</h3>
+          <div class="card-meta">GitHub – Packet Analyzer</div>
+          <p class="card-description">Network Packet Analyzer for monitoring and analyzing network traffic with protocol dissection.</p>
+          <div class="tags">
+            <span class="tag">Network Analysis</span>
+            <span class="tag">Packet Capture</span>
+            <span class="tag">Python</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Cybernews Automation</h3>
+          <div class="card-meta">GitHub – Cybernews Automation</div>
+          <p class="card-description">Cybernews Automation for daily cybersecurity news updates via Gmail using n8n workflow automation.</p>
+          <div class="tags">
+            <span class="tag">Automation</span>
+            <span class="tag">n8n</span>
+            <span class="tag">Cybersecurity News</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-subtitle">Professional credentials validating my cybersecurity expertise</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">Metaxone Certified Ethical Hacker</h3>
+          <div class="card-meta">Metaxone Solutions PVT.LTD</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Certified AppSec Practitioner CAP</h3>
+          <div class="card-meta">SecOps Group</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">ISO/IEC 27001 Information Security Associate Certification</h3>
+          <div class="card-meta">Skill front</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Alteryx Foundation Micro-Credential</h3>
+          <div class="card-meta">Alteryx</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Alteryx Machine Learning Fundamentals Micro Credential</h3>
+          <div class="card-meta">Alteryx</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Certified Network Security Practitioner (CNSP)</h3>
+          <div class="card-meta">SecOps Group</div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Certified Associate in Cybersecurity certification</h3>
+          <div class="card-meta">The Fortinet Training Institute</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Contact Me</h2>
+        <p class="section-subtitle">Open to cybersecurity opportunities, collaborations, and discussions</p>
+      </div>
+      <div class="contact-grid">
         <div>
-          <h2 class="section-title">Security projects</h2>
-          <p class="section-sub">
-            Practical tools and experiments showcasing my focus on network security, cryptography, and automation.[file:37]
+          <h3>Email</h3>
+          <p><a href="mailto:nomul.premkumar04@gmail.com">nomul.premkumar04@gmail.com</a></p>
+          <h3>Phone</h3>
+          <p><a href="tel:+919819955641">+91 9819955641</a></p>
+          <h3>Location</h3>
+          <p>Mumbai, India (+91)</p>
+        </div>
+        <div>
+          <h3>Links</h3>
+          <p>
+            <a href="https://github.com/BadshaHac" target="_blank">GitHub: github.com/BadshaHac</a><br>
+            <a href="https://www.linkedin.com/in/premkumar-nomul-559956213/" target="_blank">LinkedIn: linkedin.com/premkumar-nomul</a>
           </p>
         </div>
-        <div class="project-list">
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Port Scanner Tool (Python)</div>
-              </div>
-              <div class="project-link">
-                <a href="https://github.com/BadshaHac" target="_blank">GitHub – Port-scanner</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Custom port scanner built in Python to identify open ports and services on target hosts, helping assess basic network exposure for reconnaissance.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Networking</span>
-              <span class="project-tag">Recon</span>
-            </div>
-          </div>
-
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Cryptography Encoder/Decoder</div>
-              </div>
-              <div class="project-link">
-                <a href="https://github.com/BadshaHac" target="_blank">GitHub – Cryptography Tool</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Encoder/decoder for secure text communication, experimenting with basic cryptographic techniques and concepts for message confidentiality.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Cryptography</span>
-              <span class="project-tag">Python / Scripting</span>
-            </div>
-          </div>
-
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Password Strength Checker</div>
-              </div>
-              <div class="project-link">
-                <a href="https://github.com/BadshaHac" target="_blank">GitHub – Password Checker</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Tool to evaluate password strength and suggest improvements, designed to promote better password hygiene and security awareness.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Security Awareness</span>
-              <span class="project-tag">Python / Logic</span>
-            </div>
-          </div>
-
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Network Packet Analyzer</div>
-              </div>
-              <div class="project-link">
-                <a href="https://github.com/BadshaHac" target="_blank">GitHub – Packet Analyzer</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Network traffic analyzer for monitoring and analyzing packets to understand protocols, detect anomalies, and study network behavior.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Networking</span>
-              <span class="project-tag">Packet Analysis</span>
-            </div>
-          </div>
-
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Cybernews Automation Workflow</div>
-              </div>
-              <div class="project-link">
-                <a href="https://github.com/BadshaHac" target="_blank">GitHub – Cybernews Automation</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Automation workflow (n8n) that gathers daily cybersecurity news and sends updates via Gmail to stay on top of threats and trends.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Automation</span>
-              <span class="project-tag">n8n</span>
-              <span class="project-tag">Gmail API</span>
-            </div>
-          </div>
-
-          <div class="project-item">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Online Chatting Website</div>
-              </div>
-              <div class="project-link">
-                <a href="http://metax2.rf.gd" target="_blank">metax2.rf.gd</a>
-              </div>
-            </div>
-            <p class="project-desc">
-              Online chatting website created using WordPress, exploring real‑time communication and user experience design.[file:37]
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">WordPress</span>
-              <span class="project-tag">Web</span>
-            </div>
-          </div>
-        </div>
       </div>
+    </div>
+  </section>
 
-      <div>
-        <div class="card" id="certifications">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Certifications</div>
-              <div class="card-sub">Validating my skills</div>
-            </div>
-          </div>
-          <div class="cert-list">
-            <div class="cert-item">
-              <div class="cert-name">Metaxone Certified Ethical Hacker</div>
-              <div class="cert-meta">Metaxone Solutions Pvt. Ltd.[file:37]</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-name">Certified AppSec Practitioner (CAP)</div>
-              <div class="cert-meta">SecOps Group[file:37]</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-name">ISO/IEC 27001 Information Security Associate</div>
-              <div class="cert-meta">SkillFront[file:37]</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-name">Certified Network Security Practitioner (CNSP)</div>
-              <div class="cert-meta">SecOps Group[file:37]</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-name">Cybersecurity Certifications – Fortinet</div>
-              <div class="cert-meta">Certified Associate in Cybersecurity · Fortinet Training Institute[file:37]</div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-name">Alteryx Micro‑Credentials</div>
-              <div class="cert-meta">Foundation & Machine Learning Fundamentals[file:37]</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" id="contact" style="margin-top:14px;">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Contact</div>
-              <div class="card-sub">Let’s collaborate</div>
-            </div>
-          </div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">
-            Reach out for internships, entry‑level roles, collaborations, or security projects.
-          </div>
-          <div class="skills-grid">
-            <span class="skill-pill">Email: <a href="mailto:nomul.premkumar04@gmail.com">nomul.premkumar04@gmail.com</a></span>
-            <span class="skill-pill">Phone: <a href="tel:+919819955641">+91 9819955641</a></span>
-            <span class="skill-pill">GitHub: <a href="https://github.com/BadshaHac" target="_blank">github.com/BadshaHac</a></span>
-            <span class="skill-pill">LinkedIn: <a href=".linkedin.com/in/premkumar-nomul-559956213/" target="_blank">linkedin.com/premkumar-nomul</a></span>
-          </div>
-        </div>
-      </div>
-    </section>
-<hr> 
-    <footer>
-      <div>© 2026 Premkumar Nomul · Cybersecurity & Pentesting</div>
-      <div class="footer-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </footer>
-  </div>
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Premkumar Nomul. Built with ❤️ for cybersecurity. </p>
+    </div>
+  </footer>
 
   <script>
-    // optional: simple auto-scroll terminal effect (can be customized or removed)
-    const terminal = document.getElementById("terminal");
-    if (terminal) {
-      terminal.scrollTop = terminal.scrollHeight;
-    }
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    themeToggle.addEventListener('click', () => {
+      body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
+      themeToggle.textContent = body.dataset.theme === 'light' ? '🌙' : '☀️';
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(10, 10, 15, 0.98)';
+      } else {
+        header.style.background = 'rgba(10, 10, 15, 0.95)';
+      }
+    });
+
+    // Card hover animations
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
   </script>
 </body>
 </html>
-
 
